@@ -18,5 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/', [StudentController::class, 'index'])->name('student.index');
 Route::get('/students', [StudentController::class, 'index'])->name('student.index');
 Route::get('/student/{student}', [StudentController::class, 'show'])->name('student.show');
