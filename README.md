@@ -25,3 +25,4 @@
 
 - https://stackoverflow.com/questions/43174383/how-to-generate-a-unique-fake-email-with-a-custom-domain-with-faker
 - https://stackoverflow.com/questions/51324650/format-phone-number-in-laravel-blade
+- https://getbootstrap.com/docs/5.3/components/modal/
