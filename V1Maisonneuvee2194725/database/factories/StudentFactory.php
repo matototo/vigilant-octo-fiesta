@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Student;
 use Faker\Provider\fr_CA\Address;
+use App\Models\City;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
@@ -27,7 +27,7 @@ class StudentFactory extends Factory
             'email' => preg_replace('/@example\..*/', '@domain.com', $this->faker->unique()->safeEmail),
             'date_of_birth' => $this->faker->dateTimeBetween('1990-01-01', '2018-12-31')
             ->format('d/m/Y'),
-            'city_id' => 2,
+            'city_id' => City::factory(),
         ];
     }
 }
