@@ -6,30 +6,71 @@
     <title>{{ config('app.name') }} - @yield('title')</title>
     <!-- lenks -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      @import "functions";
+      @import "variables";
+      @import "variables-dark";
+
+      /* customize primary dark */
+      $primary: #001199;
+
+      [data-bs-theme="dark"] {
+  --bs-primary: #{$primary};
+  --bs-primary-bg-subtle: #{$primary};
+  --bs-primary-bg-subtle-dark: #{$primary};
+  
+  .btn-primary {
+    --bs-btn-bg: #{$primary};
+  }
+}
+    </style>
 </head>
 <body>
-    
-    <div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <div class="col-md-3 mb-2 mb-md-0">
-        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-          <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-        </a>
-      </div>
-
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <div class="container-fluid p-0">
+    <header class="d-flex justify-content-between py-3 px-0">
+      <ul class="nav nav-pills">
         <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="{{ route('student.index') }}" class="nav-link px-2">Students</a></li>
-        <li><a href="{{ route('student.create') }}" class="nav-link px-2">New Student</a></li>
+          <a class="nav-link" aria-current="page" href="{{ route('student.index') }}">Students</a>
+        </li>
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+              aria-expanded="false">Menu</a>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('student.create') }}">New Student</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+              aria-expanded="false">Users</a>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('user.create') }}">New user</a></li>
+              <li><a class="dropdown-item" href="{{route('user.index')}}">Users</a></li>
+          </ul>
+        </li>
       </ul>
-
-      <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-primary">Sign-up</button>
-      </div>
+      <ul class="nav nav-pills mb-2 mb-sm-0">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                aria-expanded="false">Language</a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">English</a></li>
+                <li><a class="dropdown-item" href="#">French</a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            @guest
+            <a class="nav-link" href="{{ route('login') }}">Login</a>
+            @else
+            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+            @endguest
+        </li>
+      </ul>
     </header>
+    <div class="container-fluid d-flex justify-content-end">
+            <button class="btn btn-dark shadow" id="btnSwitch">Toggle Mode</button>
+      </div>
   </div>
-    <div class="container">
+
     @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
             {{ session('success') }}
@@ -37,21 +78,29 @@
             </div>
         @endif
         @yield('content')
-    </div>
-    
-    <div class="container">
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-      </a>
-      <span class="mb-3 mb-md-0 text-body-secondary">&copy; {{ date('Y') }} {{ config('app.name') }}. All Rights Reserved.</span>
-    </div>
 
+    
+
+
+
+  <footer class="mt-auto">
+    
+      <span class="mb-3 mb-md-0 text-body-secondary">&copy; {{ date('Y') }} {{ config('app.name') }} // All Rights Reserved.</span>
+    </div>
   </footer>
-</div>
+    </div>
 </body>
     <!-- screps -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <script>
+      document.getElementById('btnSwitch').addEventListener('click',()=>{
+      if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
+          document.documentElement.setAttribute('data-bs-theme','light')
+      }
+      else {
+          document.documentElement.setAttribute('data-bs-theme','dark')
+      }
+      })
     </script>
 </html>

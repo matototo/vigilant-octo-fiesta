@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Student')
 @section('content')
+<h1 class="mt-3 mb-2 text-center">Student card</h1>
 <div class="d-flex p-2 justify-content-center">
     <div class="card" style="width: 18rem;">
       <div class="card-body justify-center">
@@ -9,6 +10,7 @@
         <p class="card-text">{{ $student->address }}</p>
         <p class="card-text">{{ $student->phone }}</p>
         <p class="card-text">{{ $student->date_of_birth }}</p>
+        <p>{{ $student->city->name }}</p>
         <div class="d-flex justify-content-between">
           <a href="{{ route('student.edit', $student->id) }}" class="card-link">Edit</a>
           <!-- <a href="#" class="card-link">Delete</a> -->

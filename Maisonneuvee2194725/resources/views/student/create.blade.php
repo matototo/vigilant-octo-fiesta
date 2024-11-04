@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Add Student')
 @section('content')
-    <h1 class="mt-5 mb-4">Add Student</h1>
+    <h1 class="mt-3 mb-2 text-center">Submit form</h1>
     <div class="row justify-content-center mt-5 mb-5">
         <div class="col-md-8">
             <div class="card">
@@ -56,6 +56,17 @@
                                 </div>
                             @endif
                         </div>
+                        <label for="city">Choose a city:</label>
+                        <select name="city" class="form-select mb-2" aria-label="City select" >
+                        <option selected>Open this select menu</option>
+                        
+                        
+                        @forelse($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                        @empty
+                        <p class="alert alert-danger">There is no city</p>
+                         @endforelse
+                        </select>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>
