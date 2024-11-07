@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SetLocaleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,15 +32,23 @@ Route::put('/edit/student/{student}', [StudentController::class, 'update'])->nam
 Route::delete('/student/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
 
 // User routes
-Route::middleware('auth')->group(function () {
-    Route::get('/users', [UserController::class, 'index'])->name('user.index');
-    Route::get('/registration', [UserController::class, 'create'])->name('user.create');
-    Route::post('/registration', [UserController::class, 'store'])->name('user.store');
-    Route::get('/edit/user/{user}', [UserController::class, 'edit'])->name('user.edit');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/users', [UserController::class, 'index'])->name('user.index');
+//     Route::get('/registration', [UserController::class, 'create'])->name('user.create');
+//     Route::post('/registration', [UserController::class, 'store'])->name('user.store');
+//     Route::get('/edit/user/{user}', [UserController::class, 'edit'])->name('user.edit');
+// });
+
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
+Route::get('/registration', [UserController::class, 'create'])->name('user.create');
+Route::post('/registration', [UserController::class, 'store'])->name('user.store');
+Route::get('/edit/user/{user}', [UserController::class, 'edit'])->name('user.edit');
 
 // Authentification routes
 Route::get('/login', [AuthController::class, 'create'])->name('login');
 Route::post('/login', [AuthController::class, 'store'])->name('login.store');
 Route::get('/logout', [AuthController::class, 'destroy'])->name('logout');
+
+// Locale
+Route::get('/lang/{locale}', [SetLocaleController::class, 'index'])->name('lang');
 

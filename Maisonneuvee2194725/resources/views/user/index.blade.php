@@ -6,16 +6,15 @@
         <div class="col-md-12">
             <div class="card mt-3">
                 <div class="card-header">
-                    <h5 class="card-title">Users</h5>
+                    <h5 class="card-title">@lang('lang.users')</h5>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
                     <thead>
                         <tr>
                         <th scope="col">#</th>
-                        <th scope="col">User</th>
-                        <th scope="col">Tasks</th>
-                        <th scope="col">Edit</th>
+                        <th scope="col">@lang('lang.user')</th>
+                        <th scope="col">@lang('lang.edit')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,16 +23,7 @@
                             <th scope="row">{{$user->id}}</th>
                             <td>{{$user->name}}</td>
                             <td>
-                                <ul>
-                                    @forelse($user->tasks as $task)
-                                    <li>{{$task->title}}</li>
-                                    @empty
-                                    <li class="text-danger"> There are no tasks to list</li>
-                                    @endforelse
-                                </ul>
-                            </td>
-                            <td>
-                                <a href="{{route('user.edit', $user->id)}}"class="btn btn-sm btn-outline-success">Edit</a>
+                                <a href="{{route('user.edit', $user->id)}}"class="btn btn-sm btn-outline-success">@lang('lang.edit')</a>
                             </td>
                         </tr>
                         @endforeach

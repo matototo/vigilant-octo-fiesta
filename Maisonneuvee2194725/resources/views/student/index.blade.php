@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Student List')
 @section('content')
-<h1 class="mt-3 mb-2 text-center">Student List</h1>
+<h1 class="mt-3 mb-2 text-center">@lang('lang.student_list')</h1>
 <div class="row">
     @forelse ($students as $student)
     <div class="col-sm-3">
@@ -15,12 +15,12 @@
                 <p>{{ $student->city->name }}</p>
             </div>
             <div class="card-footer">
-                <a href="{{ route('student.show', $student->id) }}">View</a>
+                <a href="{{ route('student.show', $student->id) }}">@lang('lang.view')</a>
             </div>
         </div>
     </div>
     @empty
-        <div class="alert alert-danger">There are no students to display!</div>
+        <div class="alert alert-danger">@lang('lang.no_students')</div>
     @endforelse
 </div>
 

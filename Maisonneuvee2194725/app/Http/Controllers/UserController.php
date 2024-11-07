@@ -18,6 +18,8 @@ class UserController extends Controller
                 ->orderby('name')
                 ->paginate(10);
 
+        // var_dump($users);
+        // return;
         return view('user.index', ["users" => $users]);
     }
 
@@ -45,9 +47,9 @@ class UserController extends Controller
         $user = new User;
         $user->fill($request->all());
         $user->password = Hash::make($request->password);
-        $user->save;
+        $user->save();
 
-        return redirect(route('user.index'))->withSuccess('User creted successfully !');
+        return redirect(route('user.index'))->withSuccess('User created successfully !');
     }
 
     /**

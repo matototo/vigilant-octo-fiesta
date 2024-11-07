@@ -37,6 +37,7 @@ class StudentController extends Controller
             'phone' => 'required|string',
             'email' => 'required|string',
             'date_of_birth' => 'nullable|date',
+            'city' => 'required|exists:cities'
         ]); 
 
         $student = Student::create([
@@ -45,7 +46,7 @@ class StudentController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'date_of_birth' => $request->date_of_birth,
-            'city_id' => 1
+            'city_id' => $request->city,
         ]);
 
         return redirect()->route('student.show', $student->id)->with('success', 'Student # '.$student->id.' : '.$student->name.' created successfully.');
@@ -87,6 +88,7 @@ class StudentController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'date_of_birth' => $request->date_of_birth,
+            'city_id' => $request->city,
         ]);
 
         return redirect()->route('student.show', $student->id)->with('success', 'Student # '.$student->id.' : '.$student->name.' updated successfully.');
