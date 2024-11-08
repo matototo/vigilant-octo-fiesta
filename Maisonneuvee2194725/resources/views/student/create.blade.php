@@ -67,6 +67,7 @@
                         <p class="alert alert-danger">@lang('login.student_no_city')</p>
                          @endforelse
                         </select>
+                     
                         <button type="submit" class="btn btn-primary">@lang('lang.save')</button>
                     </form>
                 </div>

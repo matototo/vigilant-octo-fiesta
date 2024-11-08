@@ -15,7 +15,7 @@
                 <p>{{ $student->city->name }}</p>
             </div>
             <div class="card-footer">
-                <a href="{{ route('student.show', $student->id) }}">@lang('lang.view')</a>
+                <a href="{{ route('student.show', $student->id) }}" class="icon-link" >@lang('lang.view')</a>
             </div>
         </div>
     </div>

@@ -32,7 +32,7 @@ class AuthController extends Controller
     {
         //
         $request->validate([
-            'email' => 'required|email|exists:users',
+            'email' => 'required|email|exists:students|exists:users',
             'password' => 'required|min:6|max:20',
         ]);
         $credentials = $request->only('email', 'password');
@@ -75,10 +75,10 @@ class AuthController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
         //
-        Session::flush();
+        // Session::flush();
         Auth::logout();
         return redirect(route('login'));
     }

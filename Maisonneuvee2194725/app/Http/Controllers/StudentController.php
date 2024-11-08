@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\City;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -37,8 +39,8 @@ class StudentController extends Controller
             'phone' => 'required|string',
             'email' => 'required|string',
             'date_of_birth' => 'nullable|date',
-            'city' => 'required|exists:cities'
-        ]); 
+            'city' => 'required|exists:cities',
+            ]); 
 
         $student = Student::create([
             'name' => $request->name,

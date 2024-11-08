@@ -49,6 +49,15 @@
               <li><a class="dropdown-item" href="{{route('user.index')}}">@lang('lang.user_list')</a></li>
           </ul>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+              aria-expanded="false">Forum</a>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('article.create') }}">@lang('lang.article_new')</a></li>
+              <li><a class="dropdown-item" href="{{ route('article.index') }}">Forum</a></li>
+          </ul>
+        </li>
+ 
       </ul>
       <ul class="nav nav-pills mb-2 mb-sm-0">
         <li class="nav-item dropdown">

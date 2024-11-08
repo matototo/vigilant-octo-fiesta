@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -40,9 +42,18 @@ class UserController extends Controller
         //
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|max:20'
-        ]);
+            'email' => 'required|email|unique:users|exists:students',
+            'password' => [ 
+            'required', 
+            'max:20', 
+            'min:6',
+            Password::min(2) 
+            ->letters() 
+            ->mixedCase() 
+            ->numbers() , 
+            'confirmed', ],
+            'password_confirmation' => 'required',
+            ]);
 
         $user = new User;
         $user->fill($request->all());
@@ -57,7 +68,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $articles = Article::select()->where('user_id', '=', $user->id)->get();
+        return view('user.show', ['user' => $user, 'articles' => $articles]);
     }
 
     /**
@@ -65,7 +77,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('user.edit', ['user'=>$user]);
     }
 
     /**
@@ -73,7 +85,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|unique:users',
+        ]); 
+
+        $user->update([
+            'name' => $request->name,
+            'username' => $request->username,
+        ]);
+
+        return redirect()->route('user.show', $user->id)->with('success', 'User # '.$user->id.' : '.$user->name.' updated successfully.');
     }
 
     /**

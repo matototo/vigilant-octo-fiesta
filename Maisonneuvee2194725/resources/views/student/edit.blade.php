@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Edit Student')
 @section('content')
-    <h1 class="mt-5 mb-4 text-center">Submit form</h1>
+    <h1 class="mt-3 mb-2 text-center">Submit form</h1>
     <div class="row justify-content-center mt-5 mb-5">
         <div class="col-md-8">
             <div class="card">

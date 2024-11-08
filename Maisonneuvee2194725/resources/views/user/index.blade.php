@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Users')
 @section('content')
-    <h1 class="mt-5 mb-4">Users</h1>
+    <h1 class="mt-3 mb-2 text-center">Users</h1>
     <div class="row justify-content-center mt-5 mb-5">
         <div class="col-md-12">
             <div class="card mt-3">
@@ -14,6 +14,7 @@
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">@lang('lang.user')</th>
+                        <th scope="col">@lang('lang.view')</th>
                         <th scope="col">@lang('lang.edit')</th>
                         </tr>
                     </thead>
@@ -23,7 +24,10 @@
                             <th scope="row">{{$user->id}}</th>
                             <td>{{$user->name}}</td>
                             <td>
-                                <a href="{{route('user.edit', $user->id)}}"class="btn btn-sm btn-outline-success">@lang('lang.edit')</a>
+                                <a href="{{ route('user.show', $user->id) }}" class="icon-link" >@lang('lang.view')</a>
+                            </td>
+                            <td>
+                                <a href="{{route('user.edit', $user->id)}}" class="icon-link" >@lang('lang.edit')</a>
                             </td>
                         </tr>
                         @endforeach
@@ -31,6 +35,7 @@
                     </table>
                     {{ $users }}
                 </div>
+                
             </div>
         </div>
     </div>

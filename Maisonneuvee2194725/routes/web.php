@@ -5,6 +5,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SetLocaleController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,18 +32,30 @@ Route::get('/edit/student/{student}', [StudentController::class, 'edit'])->name(
 Route::put('/edit/student/{student}', [StudentController::class, 'update'])->name('student.update');
 Route::delete('/student/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
 
-// User routes
-// Route::middleware('auth')->group(function () {
-//     Route::get('/users', [UserController::class, 'index'])->name('user.index');
-//     Route::get('/registration', [UserController::class, 'create'])->name('user.create');
-//     Route::post('/registration', [UserController::class, 'store'])->name('user.store');
-//     Route::get('/edit/user/{user}', [UserController::class, 'edit'])->name('user.edit');
-// });
+//User routes
+Route::middleware('auth')->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('user.index');
+    Route::get('/registration', [UserController::class, 'create'])->name('user.create');
+    Route::post('/registration', [UserController::class, 'store'])->name('user.store');
+    Route::get('/edit/user/{user}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/edit/user/{user}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
+    Route::delete('/destroy/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
-Route::get('/users', [UserController::class, 'index'])->name('user.index');
-Route::get('/registration', [UserController::class, 'create'])->name('user.create');
-Route::post('/registration', [UserController::class, 'store'])->name('user.store');
-Route::get('/edit/user/{user}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/article', [ArticleController::class, 'index'])->name('article.index');
+    Route::get('/article/{article}', [ArticleController::class, 'show'])->name('article.show');
+    Route::get('/edit/article/{article}', [ArticleController::class, 'edit'])->name('article.edit');
+    Route::put('/edit/article/{article}', [ArticleController::class, 'update'])->name('article.update');
+    Route::get('/create/article', [ArticleController::class, 'create'])->name('article.create');
+    Route::post('/create/article', [ArticleController::class, 'store'])->name('article.store');
+    Route::delete('/article/{article}', [ArticleController::class, 'destroy'])->name('article.destroy');
+
+});
+
+// Route::get('/users', [UserController::class, 'index'])->name('user.index');
+// Route::get('/registration', [UserController::class, 'create'])->name('user.create');
+// Route::post('/registration', [UserController::class, 'store'])->name('user.store');
+// Route::get('/edit/user/{user}', [UserController::class, 'edit'])->name('user.edit');
 
 // Authentification routes
 Route::get('/login', [AuthController::class, 'create'])->name('login');
