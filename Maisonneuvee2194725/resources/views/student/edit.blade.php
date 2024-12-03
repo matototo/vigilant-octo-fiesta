@@ -69,6 +69,11 @@
                         <p class="alert alert-danger">There is no city</p>
                          @endforelse
                         </select>
+                        @if($errors->has('city'))
+                            <div class="text-danger mt-2">
+                                {{$errors->first('city')}}
+                            </div>
+                        @endif
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>

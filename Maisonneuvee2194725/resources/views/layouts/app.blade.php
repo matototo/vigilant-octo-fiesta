@@ -4,26 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name') }} - @yield('title')</title>
-    <!-- lenks -->
+    <!-- link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <style>
-      @import "functions";
-      @import "variables";
-      @import "variables-dark";
-
-      /* customize primary dark */
-      $primary: #001199;
-
-      [data-bs-theme="dark"] {
-      --bs-primary: #{$primary};
-      --bs-primary-bg-subtle: #{$primary};
-      --bs-primary-bg-subtle-dark: #{$primary};
-  
-      .btn-primary {
-      --bs-btn-bg: #{$primary};
-  }
-}
-    </style>
 </head>
 <body>
   @php
@@ -55,9 +37,9 @@
           <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{ route('article.create') }}">@lang('lang.article_new')</a></li>
               <li><a class="dropdown-item" href="{{ route('article.index') }}">Forum</a></li>
+              <li><a class="dropdown-item" href="{{ route('category.create') }}">@lang('lang.category')</a></li>
           </ul>
         </li>
- 
       </ul>
       <ul class="nav nav-pills mb-2 mb-sm-0">
         <li class="nav-item dropdown">
@@ -77,9 +59,6 @@
         </li>
       </ul>
     </header>
-    <div class="container-fluid d-flex justify-content-end">
-            <button class="btn btn-dark shadow" id="btnSwitch">@lang('lang.mode')</button>
-      </div>
   </div>
 
     @if(session('success'))
@@ -101,17 +80,8 @@
   </footer>
     </div>
 </body>
-    <!-- screps -->
+    <!-- script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-    <script>
-      document.getElementById('btnSwitch').addEventListener('click',()=>{
-      if (document.documentElement.getAttribute('data-bs-theme') == 'dark') {
-          document.documentElement.setAttribute('data-bs-theme','light')
-      }
-      else {
-          document.documentElement.setAttribute('data-bs-theme','dark')
-      }
-      })
-    </script>
+
 </html>

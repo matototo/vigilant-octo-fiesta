@@ -9,16 +9,16 @@
             <h4 class="card-title">{{ $article->title }}</h4>
             <p>{{ $article->description }}</p>
             <p>{{ $article->user->name }}</p>
-            
+            <p>{{ $article->category ? $article->category->title[app()->getLocale()] ?? $article->category->title['en'] : '' }}
         </div>
         <div class="card-footer d-flex justify-content-between">
-            <a href="{{ route('article.show', $article->id) }}" class="icon-link" >@lang('lang.view')</a>
-            @auth
-                @if(Auth::user()->id == $article->user->id )
-                    <a href="{{ route('article.edit', $article->id) }}" class="icon-link">@lang('lang.edit')</a>
-                    <a href="{{ route('article.destroy', $article->id) }}" class="icon-link">@lang('lang.delete')</a>
-                @endif
-            @endauth
+        @auth
+          <a href="{{ route('article.show', $article->id) }}" class="icon-link">@lang('lang.view')</a>
+          @if(Auth::user()->id == $article->user->id )
+              <a href="{{ route('article.edit', $article->id) }}" class="icon-link">@lang('lang.edit')</a>
+              <a href="{{ route('article.destroy', $article->id) }}" class="icon-link">@lang('lang.delete')</a>
+          @endif
+          @endauth
         </div>
     </div>
 

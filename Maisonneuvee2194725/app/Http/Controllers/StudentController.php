@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\City;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
@@ -39,18 +40,16 @@ class StudentController extends Controller
             'phone' => 'required|string',
             'email' => 'required|string',
             'date_of_birth' => 'nullable|date',
-            'city' => 'required|exists:cities',
+            'id' => 'required|exists:cities',
             ]); 
-
         $student = Student::create([
             'name' => $request->name,
             'address' => $request->address,
             'phone' => $request->phone,
             'email' => $request->email,
             'date_of_birth' => $request->date_of_birth,
-            'city_id' => $request->city,
+            'city_id' => $request->city_id,
         ]);
-
         return redirect()->route('student.show', $student->id)->with('success', 'Student # '.$student->id.' : '.$student->name.' created successfully.');
     }
 
@@ -83,7 +82,6 @@ class StudentController extends Controller
             'email' => 'required|string',
             'date_of_birth' => 'required|date',
         ]); 
-
         $student->update([
             'name' => $request->name,
             'address' => $request->address,
@@ -92,7 +90,6 @@ class StudentController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'city_id' => $request->city,
         ]);
-
         return redirect()->route('student.show', $student->id)->with('success', 'Student # '.$student->id.' : '.$student->name.' updated successfully.');
     }
 
@@ -102,7 +99,6 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-
         return redirect()->route('student.index')->with('success', 'Student # '.$student->id.' : '.$student->name.' deleted successfully.');
     }
 }

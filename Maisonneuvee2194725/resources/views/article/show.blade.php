@@ -5,19 +5,20 @@
 <div class="d-flex p-2 justify-content-center">
     <div class="card" style="width: 18rem;">
       <div class="card-body justify-center">
-        <h5 class="card-title">{{ $article->title }}</h5>
-        <p class="card-text">{{ $article->description }}</p>
-        @auth
-            @if(Auth::user()->id == $article->user->id )
-                <div class="d-flex justify-content-between">
-                <a href="{{ route('article.edit', $article->id) }}" class="card-link">@lang('lang.edit')</a>
-                <!-- <a href="#" class="card-link">Delete</a> -->
-                <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">@lang('lang.delete')
-                </button>
-                </div>
-            @endif
-        @endauth
+        <h5 class="card-title">{{ $article->title ? $article->category->title[app()->getLocale()] ?? $article->category->title['en'] : '' }}</h5>
+        <p class="card-text">{{ $article->description ? $article->category->description[app()->getLocale()] ?? $article->category->description['en'] : '' }}</p>
       </div>
+        @auth
+        <div class="card-footer d-flex justify-content-between">
+          <a href="{{ route('article.pdf', $article->id) }}" class="icon-link">@lang('lang.pdf')</a>
+          @if(Auth::user()->id == $article->user->id )
+              <a href="{{ route('article.edit', $article->id) }}" class="icon-link">@lang('lang.edit')</a>
+              <a href="{{ route('article.destroy', $article->id) }}" class="icon-link">@lang('lang.delete')</a>
+          @endif
+        </div>
+          @endauth
+
+      
     </div>
 </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

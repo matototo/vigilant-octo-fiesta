@@ -30,6 +30,9 @@
                         </div>
                         <button type="submit" class="btn btn-primary">@lang('lang.login')</button>
                     </form>
+                    <div>
+                        <a href="{{route('user.forgot')}}">Forgot Password</a>
+                    </div>
                 </div>
             </div>
         </div>

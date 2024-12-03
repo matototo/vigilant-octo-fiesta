@@ -56,18 +56,22 @@
                                 </div>
                             @endif
                         </div>
-                        <label for="city">@lang('lang.student_city')</label>
-                        <select name="city" class="form-select mb-2" aria-label="City select" >
+                        <label for="city_id">@lang('lang.student_city')</label>
+                        <select name="city_id" class="form-select mb-2" aria-label="City select" >
                         <option selected>@lang('lang.student_open')</option>
                         
                         
                         @forelse($cities as $city)
-                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                            <option value="{{ $city->id }}" @if ($city['id'] == old('city_id')) selected @endif>{{ $city->name }}</option>
                         @empty
                         <p class="alert alert-danger">@lang('login.student_no_city')</p>
                          @endforelse
                         </select>
-                     
+                        @if($errors->has('city'))
+                            <div class="text-danger mt-2">
+                                {{$errors->first('city')}}
+                            </div>
+                        @endif
                         <button type="submit" class="btn btn-primary">@lang('lang.save')</button>
                     </form>
                 </div>
